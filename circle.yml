@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Switch Vapor to this WebSocket revision
           command: |
-            swift package edit WebSocket ~/../
+            swift package edit WebSocket --path ~/
           working_directory: ~/vapor
       - run:
           name: Run Vapor unit tests
