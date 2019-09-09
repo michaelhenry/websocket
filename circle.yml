@@ -33,18 +33,20 @@ jobs:
       - run:
           name: Compile code with optimizations
           command: swift build -c release
-
   linux-vapor:
     docker:
-      - image: codevapor/swift:4.1
+      - image: vapor/swift:5.1-bionic
+    working_directory: ~/
     steps:
+      - checkout
+      - run: apt-get update; apt-get install -y libssl-dev zlib1g-dev
       - run:
           name: Clone Vapor
           command: git clone -b master https://github.com/vapor/vapor.git
           working_directory: ~/
       - run:
           name: Switch Vapor to this WebSocket revision
-          command: swift package edit WebSocket --revision $CIRCLE_SHA1 --disable-automatic-resolution
+          command: swift package edit WebSocket --revision $CIRCLE_SHA1
           working_directory: ~/vapor
       - run:
           name: Run Vapor unit tests
