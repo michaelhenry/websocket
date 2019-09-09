@@ -36,18 +36,15 @@ jobs:
 
   linux-vapor:
     docker:
-      - image: vapor/swift:5.1-bionic
+      - image: codevapor/swift:4.1
     steps:
-      - checkout
-      - run: apt-get update; apt-get install -y libssl-dev zlib1g-dev
       - run:
           name: Clone Vapor
           command: git clone -b master https://github.com/vapor/vapor.git
           working_directory: ~/
       - run:
           name: Switch Vapor to this WebSocket revision
-          command: |
-            swift package edit WebSocket --path ./../
+          command: swift package edit WebSocket --revision $CIRCLE_SHA1 --disable-automatic-resolution
           working_directory: ~/vapor
       - run:
           name: Run Vapor unit tests
