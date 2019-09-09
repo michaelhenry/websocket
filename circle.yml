@@ -37,7 +37,6 @@ jobs:
     docker:
       - image: vapor/swift:5.1-bionic
     steps:
-      - run: apt-get update; apt-get install -y libssl-dev zlib1g-dev
       - run:
           name: Clone Vapor
           command: git clone -b master https://github.com/vapor/vapor.git
