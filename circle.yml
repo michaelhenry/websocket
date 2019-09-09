@@ -58,6 +58,7 @@ workflows:
     jobs:
       - linux
       - macos
+      - linux-vapor
 
   nightly:
     triggers:
